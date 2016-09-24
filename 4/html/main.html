@@ -1,0 +1,569 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>main</title><meta name="generator" content="MATLAB 8.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2015-12-30"><meta name="DC.source" content="main.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h2>Contents</h2><div><ul><li><a href="#1">QUESTION BLOCK 1</a></li><li><a href="#5">QUESTION BLOCK 2</a></li><li><a href="#10">QUESTION BLOCK 3</a></li><li><a href="#15">QUESTION BLOCK 4</a></li><li><a href="#21">QUESTION BLOCK 5</a></li><li><a href="#26">QUESTION BLOCK 6</a></li></ul></div><h2>QUESTION BLOCK 1<a name="1"></a></h2><pre class="codeinput">addpath(<span class="string">'res'</span>)
+load(<span class="string">'data/diabetes.mat'</span>);
+</pre><p>1) The cardinality is 768</p><p>2) Each sample has 8 features</p><p>3) The mean value of the training set:</p><pre class="codeinput">nanmean(x,2)
+</pre><pre class="codeoutput">
+ans =
+
+    4.4947
+  121.6868
+   72.4052
+   29.1534
+  155.5482
+   32.4575
+    0.4719
+   33.2409
+
+</pre><h2>QUESTION BLOCK 2<a name="5"></a></h2><p>1) Create a new dataset x1 replacing the NaN values with the mean value of the corresponding attribute without considering the missing values.</p><pre class="codeinput">x1 = zeros(size(x));
+x1(~isnan(x)) = x(~isnan(x));
+<span class="keyword">for</span> i=1:size(x,1)
+    meanval = nanmean(x(i,:));
+    x1(i,isnan(x(i,:))) = meanval;
+<span class="keyword">end</span>
+</pre><p>2) Create a new dataset x2, replacing the NaN values with the mean value of the corresponding attribute without considering the missing values conditioned to the class they belong, i.e. replace the missing attribute values of class +1 with the mean of that attribute of the examples class +1, and the same for the other class.</p><pre class="codeinput">x2 = zeros(size(x));
+x2(~isnan(x)) = x(~isnan(x));
+<span class="keyword">for</span> i=1:size(x,1)
+    meanvalplus = nanmean(x(i,y==1));
+    meanvalminus = nanmean(x(i,y==-1));
+    x2(i,isnan(x(i,y==1))) = meanvalplus;
+    x2(i,isnan(x(i,y==-1))) = meanvalminus;
+<span class="keyword">end</span>
+
+<span class="comment">% 3) [OPTIONAL]</span>
+</pre><p>4) Which are the new mean values of each dataset?</p><pre class="codeinput">figure;
+hold <span class="string">on</span>
+plot(mean(x1,2));
+plot(mean(x2,2));
+hold <span class="string">off</span>
+
+title(<span class="string">'Differences D2 and D3'</span>)
+legend(<span class="string">'D2'</span>,<span class="string">'D3'</span>);
+ylabel(<span class="string">'Value'</span>);
+xlabel(<span class="string">'Features'</span>);
+
+
+<span class="comment">% Normalize vectors to give all features the same classification weight</span>
+normx1 = normr(x1);
+normx2 = normr(x2);
+</pre><img vspace="5" hspace="5" src="main_01.png" alt=""> <p>EXTRA Reduce dimensionality to visualize the dataset in the space</p><pre class="codeinput">A = pca(normx1',3);
+B=A(y==1,:);
+C=A(y==-1,:);
+figure;
+hold <span class="string">on</span>
+scatter3(B(:,1),B(:,2), B(:,3));
+scatter3(C(:,1),C(:,2), C(:,3));
+legend(<span class="string">'Class: 1'</span>,<span class="string">'Class: -1'</span>)
+hold <span class="string">off</span>
+</pre><img vspace="5" hspace="5" src="main_02.png" alt=""> <h2>QUESTION BLOCK 3<a name="10"></a></h2><p>1) In this model you have to learn the threshold value. Explain how you can accomodate this parameter.</p><p>The trhreshold of the hyperplane would be the corresponding value to w0 in the weights vector. &gt; theta1(1) &gt; theta2(1)</p><p>2) Calculate the weights for linear regression</p><pre class="codeinput">[theta1, X1, CostHistory1] = gradientDesc(normx2', zeros(9,1)+.5, y, 0.9, 10000);
+[theta2, X2, CostHistory2] = gradientDesc(normx1', zeros(9,1)+.5, y, 0.9, 10000);
+
+
+figure;
+hold <span class="string">on</span>;
+plot(CostHistory1);
+plot(CostHistory2);
+hold <span class="string">off</span>;
+title(<span class="string">'Cost function'</span>);
+xlabel(<span class="string">'Iterations'</span>);
+ylabel(<span class="string">'Cost'</span>);
+legend(<span class="string">'D1'</span>,<span class="string">'D2'</span>)
+</pre><img vspace="5" hspace="5" src="main_03.png" alt=""> <p>3) In order to check the error rate we do X*theta=YY and after that compare YY with the original y vector.</p><pre class="codeinput">yy1 = sign(normr(X1)*theta1);
+yy2 = sign(normr(X2)*theta2);
+gt1 = yy1==y;
+gt2 = yy2==y;
+<span class="comment">% Number of correctly classified items:</span>
+numm1 = sum(gt1);
+<span class="comment">% Percent of hits in D1</span>
+pc1 = numm1/size(x,2)
+
+numm2 = sum(gt2);
+<span class="comment">% Percent of hits in D2</span>
+pc2 = numm2/size(x,2)
+</pre><pre class="codeoutput">
+pc1 =
+
+    0.7435
+
+
+pc2 =
+
+    0.7565
+
+</pre><p>The error rates are quite significant, 0.2565 and 0.2435. The parameters used for gradient descent are: alhpa = 0.9 and iterations = 10000</p><h2>QUESTION BLOCK 4<a name="15"></a></h2><p>a)</p><pre class="codeinput">clear <span class="string">all</span>;
+close <span class="string">all</span>;
+clc;
+</pre><p>b)</p><pre class="codeinput">load(<span class="string">'data/diabetes.mat'</span>);
+x2 = zeros(size(x));
+x2(~isnan(x)) = x(~isnan(x));
+<span class="keyword">for</span> i=1:size(x,1)
+    meanvalplus = nanmean(x(i,y==1));
+    meanvalminus = nanmean(x(i,y==-1));
+    x2(i,isnan(x(i,y==1))) = meanvalplus;
+    x2(i,isnan(x(i,y==-1))) = meanvalminus;
+<span class="keyword">end</span>
+</pre><p>c) First of all, normalize the data, and add the 1's vector:</p><pre class="codeinput">x2 = normr(x2);
+<span class="comment">%x2 = vertcat(ones(1,size(x,2)),x2);</span>
+</pre><p>Now split the data</p><pre class="codeinput">ff          = int16((size(x,2)/5)*4);
+x2_train    = x2(:,1:ff);
+x2_test     = x2(:,ff+1:size(x2,2));
+y_train     = y(1:ff);
+y_test      = y(ff+1:size(x2,2));
+</pre><p>d) Train the model</p><pre class="codeinput">[theta, X, CostHistory1] = gradientDesc(x2_train', zeros(9,1)+.5, y_train, 0.9, 10000);
+x2_testt = vertcat(ones(1,size(ff+1:size(x2,2),2)),x2_test);
+
+<span class="comment">% Analyze train data</span>
+res_train   = sign(X*theta);
+diff_train  = res_train==y_train;
+tot_train   = sum(diff_train);
+pc_train    = tot_train/double(ff);
+
+<span class="comment">% Analyze test data</span>
+res_test    = sign(x2_testt'*theta);
+diff_test   = res_test==y_test;
+tot_test    = sum(diff_test);
+pc_test     = tot_test/size(ff+1:size(x2,2),2);
+
+figure;
+bar([pc_train, pc_test],.4);
+title(<span class="string">'Accuracy of train/test data'</span>)
+</pre><img vspace="5" hspace="5" src="main_04.png" alt=""> <p>e) The error rate are around 25% in both cases, what means that the samples in the train set and in the test set have a similar distribution.</p><h2>QUESTION BLOCK 5<a name="21"></a></h2><p>a)</p><pre class="codeinput">clear <span class="string">all</span>;
+close <span class="string">all</span>;
+clc;
+</pre><p>b) Split the data</p><pre class="codeinput">load(<span class="string">'data/diabetes.mat'</span>);
+
+percent = 0.8;
+
+ff          = int16((size(x,2)/100)*(100*percent));
+x_train    = x(:,1:ff);
+x_test     = x(:,ff+1:size(x,2));
+y_train     = y(1:ff);
+y_test      = y(ff+1:size(x,2));
+
+clear <span class="string">x</span> <span class="string">y</span>
+</pre><p>c) Replace NaN's</p><pre class="codeinput">x2_train = zeros(size(x_train));
+x2_train(~isnan(x_train)) = x_train(~isnan(x_train));
+x2_test = zeros(size(x_test));
+x2_test(~isnan(x_test)) = x_test(~isnan(x_test));
+<span class="keyword">for</span> i=1:size(x_train,1)
+    <span class="comment">% Calculate means</span>
+    meanvalplus     = nanmean(x_train(i,y_train==1));
+    meanvalminus    = nanmean(x_train(i,y_train==-1));
+
+    <span class="comment">% Replace NaN's by means</span>
+    x2_train(i,isnan(x_train(i,y_train==1)))    = meanvalplus;
+    x2_train(i,isnan(x_train(i,y_train==-1)))   = meanvalminus;
+    x2_test(i,isnan(x_test(i,y_test==1)))       = meanvalplus;
+    x2_test(i,isnan(x_test(i,y_test==-1)))      = meanvalminus;
+<span class="keyword">end</span>
+</pre><p>c) Normalize the data</p><pre class="codeinput">mn = min(x2_train,[],2);
+mx = max(x2_train,[],2);
+
+<span class="keyword">for</span> i=1:size(x2_train,1)
+    x2_train(i,:) = (x2_train(i,:) - mn(i)) / (mx(i) - mn(i));
+    x2_test(i,:)  = (x2_test(i,:) - mn(i)) / (mx(i) - mn(i));
+<span class="keyword">end</span>
+
+clear <span class="string">mn</span> <span class="string">mx</span>
+
+[theta, X, CostHistory1] = gradientDesc(x2_train', zeros(9,1)+.5, y_train, 0.9, 10000);
+x2_testt = vertcat(ones(1,size(x2_test,2)),x2_test);
+
+<span class="comment">% Analyze train data</span>
+res_train   = sign(X*theta);
+diff_train  = res_train==y_train;
+tot_train   = sum(diff_train);
+pc_train    = tot_train/double(ff);
+
+<span class="comment">% Analyze test data</span>
+res_test    = sign(x2_testt'*theta);
+diff_test   = res_test==y_test;
+tot_test    = sum(diff_test);
+pc_test     = tot_test/size(x2_test,2);
+
+figure;
+bar([pc_train, pc_test],.4);
+title(<span class="string">'Accuracy of train/test data'</span>)
+</pre><img vspace="5" hspace="5" src="main_05.png" alt=""> <p>f) g) Again we have similar results, the difference between the training and the test error is quite larger than in the previous case. The difference is caused by the substitution policy, now we are using just a part of the whole information.</p><h2>QUESTION BLOCK 6<a name="26"></a></h2><p>a)</p><pre class="codeinput">clear <span class="string">all</span>;
+close <span class="string">all</span>;
+clc;
+load(<span class="string">'data/diabetes.mat'</span>);
+
+percent = 0.01;
+percent_rg = (1:9)./10.;
+iter = 10000;
+alpha = 0.000001;
+normalize = 0;
+
+pc_train_rg = zeros(size(percent_rg,2),1);
+pc_test_rg = zeros(size(percent_rg,2),1);
+
+
+<span class="keyword">for</span> i=1:size(percent_rg,2)
+    [ pc_train, pc_test ] = evaluate( x, y, percent_rg(i), alpha, iter, normalize );
+    pc_train_rg(i) = pc_train;
+    pc_test_rg(i) = pc_test;
+<span class="keyword">end</span>
+close <span class="string">all</span>
+figure;
+hold <span class="string">on</span>
+plot(1-pc_train_rg);
+plot(1-pc_test_rg);
+xlabel(<span class="string">'% used for train (x*10)'</span>)
+ylabel(<span class="string">'% Error'</span>)
+</pre><img vspace="5" hspace="5" src="main_06.png" alt=""> <p>The results show us that depending on which percentage of the dataset we use we can obtain better or worse results. The obvious conclusion is that the data is not well distributed.</p><p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2015a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% QUESTION BLOCK 1
+%
+addpath('res')
+load('data/diabetes.mat');
+%%
+% 1) The cardinality is 768
+%%
+% 2) Each sample has 8 features
+%%
+% 3) The mean value of the training set:
+nanmean(x,2)
+
+
+%% QUESTION BLOCK 2
+%%
+% 1) Create a new dataset x1 replacing the NaN values with the mean value of
+% the corresponding attribute without considering the missing values.
+x1 = zeros(size(x));
+x1(~isnan(x)) = x(~isnan(x));
+for i=1:size(x,1)
+    meanval = nanmean(x(i,:));
+    x1(i,isnan(x(i,:))) = meanval;
+end
+%%
+% 2) Create a new dataset x2, replacing the NaN values with the mean value
+% of the corresponding attribute without considering the missing values
+% conditioned to the class they belong, i.e. replace the missing attribute
+% values of class +1 with the mean of that attribute of the examples class
+% +1, and the same for the other class.
+x2 = zeros(size(x));
+x2(~isnan(x)) = x(~isnan(x));
+for i=1:size(x,1)
+    meanvalplus = nanmean(x(i,y==1));
+    meanvalminus = nanmean(x(i,y==-1));
+    x2(i,isnan(x(i,y==1))) = meanvalplus;
+    x2(i,isnan(x(i,y==-1))) = meanvalminus;
+end
+
+% 3) [OPTIONAL]
+
+%%
+% 4) Which are the new mean values of each dataset?
+
+figure;
+hold on
+plot(mean(x1,2));
+plot(mean(x2,2));
+hold off
+
+title('Differences D2 and D3')
+legend('D2','D3');
+ylabel('Value');
+xlabel('Features');
+
+
+% Normalize vectors to give all features the same classification weight
+normx1 = normr(x1);
+normx2 = normr(x2);
+
+%%
+% EXTRA
+% Reduce dimensionality to visualize the dataset in the space
+A = pca(normx1',3);
+B=A(y==1,:);
+C=A(y==-1,:);
+figure;
+hold on
+scatter3(B(:,1),B(:,2), B(:,3));
+scatter3(C(:,1),C(:,2), C(:,3));
+legend('Class: 1','Class: -1')
+hold off
+
+
+
+%% QUESTION BLOCK 3
+% 1) In this model you have to learn the threshold value. Explain how you can accomodate this parameter.
+%%
+% The trhreshold of the hyperplane would be the corresponding value to
+% w0 in the weights vector.
+% > theta1(1)
+% > theta2(1)
+%%
+% 2) Calculate the weights for linear regression
+[theta1, X1, CostHistory1] = gradientDesc(normx2', zeros(9,1)+.5, y, 0.9, 10000);
+[theta2, X2, CostHistory2] = gradientDesc(normx1', zeros(9,1)+.5, y, 0.9, 10000);
+
+
+figure;
+hold on;
+plot(CostHistory1);
+plot(CostHistory2);
+hold off;
+title('Cost function');
+xlabel('Iterations');
+ylabel('Cost');
+legend('D1','D2')
+%%
+% 3) In order to check the error rate we do X*theta=YY and after that
+% compare YY with the original y vector.
+
+yy1 = sign(normr(X1)*theta1);
+yy2 = sign(normr(X2)*theta2);
+gt1 = yy1==y;
+gt2 = yy2==y;
+% Number of correctly classified items:
+numm1 = sum(gt1);
+% Percent of hits in D1
+pc1 = numm1/size(x,2)
+
+numm2 = sum(gt2);
+% Percent of hits in D2
+pc2 = numm2/size(x,2)
+
+%%
+% The error rates are quite significant, 0.2565 and 0.2435.
+% The parameters used for gradient descent are: alhpa = 0.9 and 
+% iterations = 10000
+
+%% QUESTION BLOCK 4
+% a)
+clear all;
+close all;
+clc;
+
+%%
+% b)
+load('data/diabetes.mat');
+x2 = zeros(size(x));
+x2(~isnan(x)) = x(~isnan(x));
+for i=1:size(x,1)
+    meanvalplus = nanmean(x(i,y==1));
+    meanvalminus = nanmean(x(i,y==-1));
+    x2(i,isnan(x(i,y==1))) = meanvalplus;
+    x2(i,isnan(x(i,y==-1))) = meanvalminus;
+end
+%%
+% c) First of all, normalize the data, and add the 1's vector:
+x2 = normr(x2);
+%x2 = vertcat(ones(1,size(x,2)),x2);
+%%
+% Now split the data
+ff          = int16((size(x,2)/5)*4);
+x2_train    = x2(:,1:ff);
+x2_test     = x2(:,ff+1:size(x2,2));
+y_train     = y(1:ff);
+y_test      = y(ff+1:size(x2,2));
+%%
+% d) Train the model
+[theta, X, CostHistory1] = gradientDesc(x2_train', zeros(9,1)+.5, y_train, 0.9, 10000);
+x2_testt = vertcat(ones(1,size(ff+1:size(x2,2),2)),x2_test);
+
+% Analyze train data
+res_train   = sign(X*theta);
+diff_train  = res_train==y_train;
+tot_train   = sum(diff_train);
+pc_train    = tot_train/double(ff);
+
+% Analyze test data
+res_test    = sign(x2_testt'*theta);
+diff_test   = res_test==y_test;
+tot_test    = sum(diff_test);
+pc_test     = tot_test/size(ff+1:size(x2,2),2);
+
+figure;
+bar([pc_train, pc_test],.4);
+title('Accuracy of train/test data')
+%%
+% e) The error rate are around 25% in both cases, what means that the
+% samples in the train set and in the test set have a similar distribution.
+
+
+%% QUESTION BLOCK 5
+% a)
+clear all;
+close all;
+clc;
+%%
+% b) Split the data
+load('data/diabetes.mat');
+
+percent = 0.8;
+
+ff          = int16((size(x,2)/100)*(100*percent));
+x_train    = x(:,1:ff);
+x_test     = x(:,ff+1:size(x,2));
+y_train     = y(1:ff);
+y_test      = y(ff+1:size(x,2));
+
+clear x y
+
+%%
+% c) Replace NaN's
+
+x2_train = zeros(size(x_train));
+x2_train(~isnan(x_train)) = x_train(~isnan(x_train));
+x2_test = zeros(size(x_test));
+x2_test(~isnan(x_test)) = x_test(~isnan(x_test));
+for i=1:size(x_train,1)
+    % Calculate means
+    meanvalplus     = nanmean(x_train(i,y_train==1));
+    meanvalminus    = nanmean(x_train(i,y_train==-1));
+    
+    % Replace NaN's by means
+    x2_train(i,isnan(x_train(i,y_train==1)))    = meanvalplus;
+    x2_train(i,isnan(x_train(i,y_train==-1)))   = meanvalminus;
+    x2_test(i,isnan(x_test(i,y_test==1)))       = meanvalplus;
+    x2_test(i,isnan(x_test(i,y_test==-1)))      = meanvalminus;
+end
+
+%%
+% c) Normalize the data
+mn = min(x2_train,[],2);
+mx = max(x2_train,[],2);
+
+for i=1:size(x2_train,1)
+    x2_train(i,:) = (x2_train(i,:) - mn(i)) / (mx(i) - mn(i));
+    x2_test(i,:)  = (x2_test(i,:) - mn(i)) / (mx(i) - mn(i));
+end
+
+clear mn mx
+
+[theta, X, CostHistory1] = gradientDesc(x2_train', zeros(9,1)+.5, y_train, 0.9, 10000);
+x2_testt = vertcat(ones(1,size(x2_test,2)),x2_test);
+
+% Analyze train data
+res_train   = sign(X*theta);
+diff_train  = res_train==y_train;
+tot_train   = sum(diff_train);
+pc_train    = tot_train/double(ff);
+
+% Analyze test data
+res_test    = sign(x2_testt'*theta);
+diff_test   = res_test==y_test;
+tot_test    = sum(diff_test);
+pc_test     = tot_test/size(x2_test,2);
+
+figure;
+bar([pc_train, pc_test],.4);
+title('Accuracy of train/test data')
+%%
+% f) g) Again we have similar results, the difference between the training
+% and the test error is quite larger than in the previous case. The
+% difference is caused by the substitution policy, now we are using just a
+% part of the whole information.
+
+%% QUESTION BLOCK 6
+% a)
+clear all;
+close all;
+clc;
+load('data/diabetes.mat');
+
+percent = 0.01;
+percent_rg = (1:9)./10.;
+iter = 10000;
+alpha = 0.000001;
+normalize = 0;
+
+pc_train_rg = zeros(size(percent_rg,2),1); 
+pc_test_rg = zeros(size(percent_rg,2),1);
+
+
+for i=1:size(percent_rg,2)
+    [ pc_train, pc_test ] = evaluate( x, y, percent_rg(i), alpha, iter, normalize );
+    pc_train_rg(i) = pc_train;
+    pc_test_rg(i) = pc_test;
+end
+close all
+figure;
+hold on
+plot(1-pc_train_rg);
+plot(1-pc_test_rg);
+xlabel('% used for train (x*10)')
+ylabel('% Error')
+%%
+% The results show us that depending on which percentage of the dataset we
+% use we can obtain better or worse results. The obvious conclusion is that
+% the data is not well distributed.
+
+
+
+
+
+
+
+
+##### SOURCE END #####
+--></body></html>

@@ -1,0 +1,405 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>del1</title><meta name="generator" content="MATLAB 8.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2015-12-30"><meta name="DC.source" content="del1.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h2>Contents</h2><div><ul><li><a href="#1">Question block 1</a></li><li><a href="#2">Question block 2</a></li><li><a href="#3">Question block 3</a></li><li><a href="#4">Question block 4</a></li><li><a href="#5">Question block 5</a></li><li><a href="#6">Question block 7</a></li></ul></div><h2>Question block 1<a name="1"></a></h2><p>1)</p><pre class="codeinput">addpath(<span class="string">'src'</span>);
+load(<span class="string">'./data/reg_data_set_1.mat'</span>);
+scatter(x,y); <span class="comment">% This generated image corresponds to 1)</span>
+</pre><img vspace="5" hspace="5" src="del1_01.png" alt=""> <h2>Question block 2<a name="2"></a></h2><p>1) The optimal value of the regression is; [-2.047...;7.994...] 2) It looks like a quite good approximation really.</p><pre class="codeinput">figure
+b = x\y;
+[w,X] = polireg(x,y,1);
+scatter(x, y);
+hold <span class="string">on</span>
+plot(x,X*w,<span class="string">'-'</span>);
+hold <span class="string">off</span>
+</pre><img vspace="5" hspace="5" src="del1_02.png" alt=""> <h2>Question block 3<a name="3"></a></h2><p>1) With an alpha of 0.1, the Theta values converge at:[-1,6; 7.4]</p><pre class="codeinput"><span class="comment">% 2) With an alpha of 0.1, in order to make the algorithm converge, 90</span>
+
+<span class="comment">% iterations are needed</span>
+<span class="comment">% 3)</span>
+stepsize = 0.1;
+
+<span class="comment">%Do the gradient descent</span>
+[theta, cost, hist] = grad2simple(x_tmp,y,[5; 5], stepsize, 90);
+figure
+plot(cost);
+
+<span class="comment">% 4) It does, because this method uses a fixed step size, and it can jump</span>
+<span class="comment">% over the minimum</span>
+figure
+plot(cost(80:83));
+
+<span class="comment">% 5) The alpha is already at 0.1, with the code below any parameters can be</span>
+<span class="comment">% tested</span>
+stepsize = 0.1;     <span class="comment">% Define the step size on every dimension</span>
+num_iter = 90;      <span class="comment">% Define the number of iterations before it end</span>
+theta    = [5; 5];  <span class="comment">% Initial theta</span>
+X        = x_tmp;   <span class="comment">% Initial X matrix</span>
+y        = y;       <span class="comment">% Initial y matrix</span>
+[theta, cost, hist] = grad2simple(X,y,theta, stepsize, num_iter);
+figure
+plot(cost);
+
+
+
+<span class="comment">% EXTRA</span>
+<span class="comment">% Show the movement of the function in a contour</span>
+res = lr_descent(x,y,[-5,10],[-5,10]);
+figure
+contour(res,8);
+hold <span class="string">on</span>
+plot_dir(hist(:,1)+5,hist(:,2)+5)
+hold <span class="string">off</span>
+<span class="comment">%-------------------------------------------------------------------------%</span>
+</pre><pre class="codeoutput error">Undefined function or variable 'x_tmp'.
+
+Error in del1 (line 29)
+[theta, cost, hist] = grad2simple(x_tmp,y,[5; 5], stepsize, 90);
+</pre><h2>Question block 4<a name="4"></a></h2><pre class="codeinput">figure;
+[~, cost, ~] = grad2(x_tmp,y,[0; 0], 1, 1000);
+plot(cost);
+hold <span class="string">on</span>;
+[~, cost, ~] = grad2(x_tmp,y,[0; 0], .1, 1000);
+plot(cost);
+[~, cost, ~] = grad2(x_tmp,y,[0; 0], .01, 1000);
+plot(cost);
+hold <span class="string">off</span>;
+
+
+<span class="comment">% 1) The optimal values are</span>
+<span class="comment">%    -2.0474</span>
+<span class="comment">%    7.9948</span>
+
+<span class="comment">% 2) The parameters used make the algorithm converge are:</span>
+<span class="comment">% &gt; Learning rate = 1</span>
+<span class="comment">% &gt; Number of iterations = 200</span>
+<span class="comment">% &gt; Starting theta = 5,5</span>
+
+<span class="comment">% 3)</span>
+[theta, cost, hist] = grad2(x_tmp,y,[5; 5], 1, 200);
+plot(cost);
+hold <span class="string">off</span>;
+
+<span class="comment">% 4) It does not oscilate because the direction and the step size is</span>
+<span class="comment">% determined by the magnitude of the gradient, that does that when the</span>
+<span class="comment">% method is close to the local minimum it moves really slowly and it needs</span>
+<span class="comment">% a little ammount of iterations to get close to the center, but a lot to</span>
+<span class="comment">% converge.</span>
+figure;
+plot(cost(150:190));
+
+
+res = lr_descent(x,y,[-5,10],[-5,10]);
+<span class="comment">%figure</span>
+<span class="comment">%surf(res,'EdgeColor','none','LineStyle','none','FaceLighting','phong')</span>
+figure
+contour(res);
+hold <span class="string">on</span>
+plot_dir(hist(:,1)+5,hist(:,2)+5)
+</pre><h2>Question block 5<a name="5"></a></h2><p>1) The optimal values found for a quadratic polynomial regression are: [18.2255681003074;-10.2344557665670;1.06732192318857]</p><pre class="codeinput"><span class="comment">% 2) A quadratic function is better than a linear function to approximate</span>
+<span class="comment">% the function of the dataset because the original function has many</span>
+<span class="comment">% curves.</span>
+figure
+[w,X]=polireg(x,y,2);
+scatter(x, y);
+hold <span class="string">on</span>
+plot(sort(x),sort(X)*w,<span class="string">'-'</span>);
+hold <span class="string">off</span>
+clear
+</pre><h2>Question block 7<a name="6"></a></h2><pre class="codeinput"><span class="comment">% Points 1, 2, 3 in the following code:</span>
+
+load(<span class="string">'data/reg_data_set_2.mat'</span>);
+train_x = x(1:10);
+train_y = y(1:10);
+test_x = x(11:20);
+test_y = y(11:20);
+
+figure;
+scatter(train_x, train_y);
+hold <span class="string">on</span>
+scatter(test_x, test_y);
+RMS_A_Train = zeros(6,1);
+RMS_A_Test = zeros(6,1);
+RMS_GD_Train = zeros(6,1);
+RMS_GD_Test = zeros(6,1);
+<span class="keyword">for</span> i=1:6
+    deg = i; <span class="comment">% Define the degree and execute the following code</span>
+
+    <span class="comment">% Calculate weights analytically</span>
+    [w,X] = polireg(train_x,train_y,deg);
+
+    <span class="comment">% Calculate weights with gradient descent</span>
+    [w2,~, ~] = grad(train_x,train_y,(1:deg+1)',0.01, 1000);
+
+    tX = polimat(test_x,deg);
+
+    <span class="comment">% RMS Analytical</span>
+    RMS_A_Train(i) = sqrt(sum(tX*w-train_y).^2);
+    RMS_A_Test(i) = sqrt(sum(tX*w-test_y).^2);
+    <span class="comment">% RMS Gradient descent</span>
+    RMS_GD_Train(i) = sqrt(sum(tX*w2-train_y).^2);
+    RMS_GD_Test(i) = sqrt(sum(tX*w2-test_y).^2);
+    plot(sort(train_x),sort(X)*w,<span class="string">'-'</span>);
+<span class="keyword">end</span>
+figure
+scatter(train_x, train_y);
+hold <span class="string">on</span>
+scatter(test_x, test_y);
+plot(sort(train_x),sort(X)*w2,<span class="string">'-'</span>);
+
+<span class="comment">% 4) Plot on the error curves</span>
+
+figure
+plot(RMS_A_Train);
+hold <span class="string">on</span>
+plot(RMS_A_Test);
+legend(<span class="string">'Train'</span>,<span class="string">'Test'</span>)
+
+<span class="comment">%) 5) No they don't agree, that's because the number of samples is quite</span>
+<span class="comment">%small. The training set contains 10 samples and the test set another 10</span>
+<span class="comment">%samples,so it's really difficult to decide what's the best model to fit</span>
+<span class="comment">%the original function.</span>
+</pre><p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2015a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Question block 1
+% 1)
+addpath('src');
+load('./data/reg_data_set_1.mat');
+scatter(x,y); % This generated image corresponds to 1)
+
+%% Question block 2
+% 1) The optimal value of the regression is; [-2.047...;7.994...]
+% 2) It looks like a quite good approximation really.
+figure
+b = x\y;
+[w,X] = polireg(x,y,1);
+scatter(x, y);
+hold on
+plot(x,X*w,'-');
+hold off
+
+
+%% Question block 3
+% 1) With an alpha of 0.1, the Theta values converge at:[-1,6; 7.4] 
+
+% 2) With an alpha of 0.1, in order to make the algorithm converge, 90
+
+% iterations are needed
+% 3) 
+stepsize = 0.1;
+
+%Do the gradient descent
+[theta, cost, hist] = grad2simple(x_tmp,y,[5; 5], stepsize, 90);
+figure
+plot(cost);
+
+% 4) It does, because this method uses a fixed step size, and it can jump
+% over the minimum
+figure
+plot(cost(80:83));
+
+% 5) The alpha is already at 0.1, with the code below any parameters can be
+% tested
+stepsize = 0.1;     % Define the step size on every dimension
+num_iter = 90;      % Define the number of iterations before it end
+theta    = [5; 5];  % Initial theta
+X        = x_tmp;   % Initial X matrix
+y        = y;       % Initial y matrix
+[theta, cost, hist] = grad2simple(X,y,theta, stepsize, num_iter);
+figure
+plot(cost);
+
+
+
+% EXTRA
+% Show the movement of the function in a contour
+res = lr_descent(x,y,[-5,10],[-5,10]);
+figure
+contour(res,8);
+hold on
+plot_dir(hist(:,1)+5,hist(:,2)+5)
+hold off
+%REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH-%
+
+%% Question block 4
+figure;
+[~, cost, ~] = grad2(x_tmp,y,[0; 0], 1, 1000);
+plot(cost);
+hold on;
+[~, cost, ~] = grad2(x_tmp,y,[0; 0], .1, 1000);
+plot(cost);
+[~, cost, ~] = grad2(x_tmp,y,[0; 0], .01, 1000);
+plot(cost);
+hold off;
+
+
+% 1) The optimal values are 
+%    -2.0474
+%    7.9948
+
+% 2) The parameters used make the algorithm converge are:
+% > Learning rate = 1
+% > Number of iterations = 200
+% > Starting theta = 5,5
+
+% 3) 
+[theta, cost, hist] = grad2(x_tmp,y,[5; 5], 1, 200);
+plot(cost);
+hold off;
+
+% 4) It does not oscilate because the direction and the step size is
+% determined by the magnitude of the gradient, that does that when the
+% method is close to the local minimum it moves really slowly and it needs
+% a little ammount of iterations to get close to the center, but a lot to
+% converge.
+figure;
+plot(cost(150:190));
+
+
+res = lr_descent(x,y,[-5,10],[-5,10]);
+%figure
+%surf(res,'EdgeColor','none','LineStyle','none','FaceLighting','phong')
+figure
+contour(res);
+hold on
+plot_dir(hist(:,1)+5,hist(:,2)+5)
+
+
+%% Question block 5
+% 1) The optimal values found for a quadratic polynomial regression are:
+% [18.2255681003074;-10.2344557665670;1.06732192318857]
+
+% 2) A quadratic function is better than a linear function to approximate
+% the function of the dataset because the original function has many
+% curves.
+figure
+[w,X]=polireg(x,y,2);
+scatter(x, y);
+hold on
+plot(sort(x),sort(X)*w,'-');
+hold off
+clear
+%% Question block 7
+
+% Points 1, 2, 3 in the following code:
+
+load('data/reg_data_set_2.mat');
+train_x = x(1:10);
+train_y = y(1:10);
+test_x = x(11:20);
+test_y = y(11:20);
+
+figure;
+scatter(train_x, train_y);
+hold on
+scatter(test_x, test_y);
+RMS_A_Train = zeros(6,1);
+RMS_A_Test = zeros(6,1);
+RMS_GD_Train = zeros(6,1);
+RMS_GD_Test = zeros(6,1);
+for i=1:6
+    deg = i; % Define the degree and execute the following code
+    
+    % Calculate weights analytically
+    [w,X] = polireg(train_x,train_y,deg);
+    
+    % Calculate weights with gradient descent
+    [w2,~, ~] = grad(train_x,train_y,(1:deg+1)',0.01, 1000);
+    
+    tX = polimat(test_x,deg);
+    
+    % RMS Analytical
+    RMS_A_Train(i) = sqrt(sum(tX*w-train_y).^2);
+    RMS_A_Test(i) = sqrt(sum(tX*w-test_y).^2);
+    % RMS Gradient descent
+    RMS_GD_Train(i) = sqrt(sum(tX*w2-train_y).^2);
+    RMS_GD_Test(i) = sqrt(sum(tX*w2-test_y).^2);
+    plot(sort(train_x),sort(X)*w,'-');
+end
+figure
+scatter(train_x, train_y);
+hold on
+scatter(test_x, test_y);
+plot(sort(train_x),sort(X)*w2,'-');
+
+% 4) Plot on the error curves
+
+figure
+plot(RMS_A_Train);
+hold on
+plot(RMS_A_Test);
+legend('Train','Test')
+
+%) 5) No they don't agree, that's because the number of samples is quite
+%small. The training set contains 10 samples and the test set another 10
+%samples,so it's really difficult to decide what's the best model to fit
+%the original function.
+
+
+
+
+##### SOURCE END #####
+--></body></html>
